@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
 
 export function Navbar() {
-  const total = 25000;
+  const { totalCart } = useCart();
   // TODO: token = true --> Profile / Logout
   // TODO: token = false --> Login / Register
   const token = false;
@@ -43,7 +44,7 @@ export function Navbar() {
           </ul>
         </div>
         <Link className="nav-link total-navbar" to="/cart">
-          🛒 Total: ${total.toLocaleString("es-CL")}
+          🛒 Total: ${totalCart.toLocaleString("es-CL")}
         </Link>
       </div>
     </nav>

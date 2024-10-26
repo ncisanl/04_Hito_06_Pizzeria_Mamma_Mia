@@ -1,3 +1,5 @@
+//TODO: Ya no se utiliza pero está para comprender el consumo desde un JS y la estructura inicial de este.
+
 export const pizzas = [
   {
     id: "1",

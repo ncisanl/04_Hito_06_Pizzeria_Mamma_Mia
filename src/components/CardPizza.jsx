@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
+import { useCart } from "../context/CartContext.jsx";
 
-export function CardPizza({ pizzaInfo, add, eliminate, cartButton }) {
+export function CardPizza({ pizzaInfo, cartButton }) {
+  const { addToCart, deleteToCart } = useCart();
   const mapIngredients = pizzaInfo.ingredients.map((ingredient, index) => {
     const isLast = index === pizzaInfo.ingredients.length - 1;
     return (
@@ -36,7 +38,7 @@ export function CardPizza({ pizzaInfo, add, eliminate, cartButton }) {
             <button
               onClick={() => {
                 if (cartButton) {
-                  eliminate(pizzaInfo);
+                  deleteToCart(pizzaInfo);
                 }
               }}
               type="button"
@@ -45,11 +47,7 @@ export function CardPizza({ pizzaInfo, add, eliminate, cartButton }) {
               {cartButton ? "Quitar ❌" : "Ver Más 👀"}
             </button>
             <button
-              onClick={() => {
-                if (cartButton) {
-                  add(pizzaInfo);
-                }
-              }}
+              onClick={() => addToCart(pizzaInfo)}
               type="button"
               className="btn btn-dark"
             >
@@ -68,7 +66,7 @@ CardPizza.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.array,
-    quantity: PropTypes.number,
     img: PropTypes.string,
   }),
+  cartButton: PropTypes.bool,
 };
