@@ -1,21 +1,11 @@
 import { Header } from "../components/Header.jsx";
 import { CardPizza } from "../components/CardPizza.jsx";
-import { useEffect, useState } from "react";
+import { usePizzas } from "../context/PizzasContext.jsx";
 
 export function Home() {
-  const [pizzasApi, setPizzasApi] = useState([]);
+  const { pizzas } = usePizzas();
 
-  const getPizzas = async () => {
-    const resPizzas = await fetch("http://localhost:5000/api/pizzas");
-    const pizzasResponse = await resPizzas.json();
-    setPizzasApi(pizzasResponse);
-  };
-
-  useEffect(() => {
-    getPizzas();
-  }, []);
-
-  const mapPizzas = pizzasApi.map((pizza) => {
+  const mapPizzas = pizzas.map((pizza) => {
     return <CardPizza key={pizza.id} pizzaInfo={pizza} cartButton={false} />;
   });
 

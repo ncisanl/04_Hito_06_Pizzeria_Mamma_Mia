@@ -1,17 +1,7 @@
-import { useEffect, useState } from "react";
+import { usePizzas } from "../context/PizzasContext.jsx";
 
 export function Pizza() {
-  const [pizza, setPizza] = useState([]);
-
-  const getPizza = async () => {
-    const resPizza = await fetch("http://localhost:5000/api/pizzas/p001");
-    const pizzaResponse = await resPizza.json();
-    setPizza(pizzaResponse);
-  };
-
-  useEffect(() => {
-    getPizza();
-  }, []);
+  const { pizza } = usePizzas();
 
   const mapIngredients = pizza?.ingredients?.map((ingredient, index) => {
     const isLast = index === pizza.ingredients.length - 1;
